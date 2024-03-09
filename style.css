@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.p5Canvas{
+    cursor:none;
+}
