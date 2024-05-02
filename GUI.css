@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container-wrapper-down{
+    
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .container-content{
+    position: sticky;
+}
+
+
+.container-content{
+    background-color: white;
+    height: 35vh;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+}
+
+.container-banner{
+    height: 100%;
+    width: 100%;
+    background-color: red;
+
+
+}
+
+.container-list{
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.container-list li{
+    display: inline;
+}
+
+body {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    animation: color-change 10s linear infinite;
+    animation-delay: 1s;
+}
+/*adding rain img and making opacity 0*/
+body:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(
+https://as2.ftcdn.net/v2/jpg/01/73/09/13/1000_F_173091317_3ROz30HcUJsrAxI4TrSejO73oKrflZjf.jpg);
+    animation: shapes 10s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    opacity: 0;
+}
+/* just changing the position of image 
+of rain using keyframes*/
+@keyframes shapes {
+    0% {
+        background-position: 0 0;
+        opacity: 1;
+    }
+
+    100% {
+        background-position: 8% 80%;
+        opacity: 1;
+    }
+}
+/* applying filter at different angle
+on different interval using keyframe*/
+@keyframes color-change {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.gui-button{
+    width: 16rem;
+    height: 5rem;
+}
+

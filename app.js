@@ -1,15 +1,20 @@
 function setup() {
-    createCanvas(800, 1200);
-
+    createCanvas(windowWidth, windowHeight);
+    
     squareOne = new enemySquare(400, 800, 100)
-
     squareTwo = new enemySquare(200, 500, 150)
+    levelOne = new levelDesign(new enemySquare(400, 800, 70), new base(), new player())
+    
 }
   
 function draw() {
-    background('rgb(119,255,119)');
-    loadUser()
-    loadGUI();
+
+    // level one
+    levelOne.loadItems()
+    
+    levelOne.handlemove()
+
+    
     
     // spawn enemy object and make move.
     squareOne.spawn()
@@ -17,6 +22,8 @@ function draw() {
 
     squareTwo.spawn()
     squareTwo.move()
+
+    
 }
 
 function mousePressed() {    // if mouse presses square, cut.
@@ -32,23 +39,65 @@ function mousePressed() {    // if mouse presses square, cut.
 
 
 
+  
+
+
+
 
 function loadUser(){
-    strokeWeight(10)
-    point(mouseX, mouseY)
+    
  
     
 
 }
 
-function loadGUI() {
-    //buttons
-    strokeWeight(1)
-    square(20, 20, 50)
-    square(100, 20, 50)
-    square(180, 20, 50)
-    square(260, 20, 50)
-    fill(0, 0); // lets squares be overlapped by cursor.
+
+
+class levelDesign {
+    //TO-DO: constructor
+    //states: level color,
+    //
+    constructor(square, base, player){
+        this.square = square
+        this.player = player
+        this.base = base
+    }
+    
+
+
+    loadItems(){
+        this.loadColor()
+        this.loadPlayer()
+        this.loadGUI()
+        
+    }
+
+    loadColor(){
+        background('rgb(119,255,119)')
+    }
+
+    
+    loadPlayer(){
+        strokeWeight(10)
+        point(mouseX, mouseY)
+    }
+
+    loadGUI() {
+        //buttons
+        strokeWeight(1)
+        square(20, 20, 50)
+        square(100, 20, 50)
+        square(180, 20, 50)
+        square(260, 20, 50)
+        fill(0, 0); // lets squares be overlapped by cursor.
+    }
+
+    handlemove() {
+        this.square.spawn()
+        this.square.move()
+    }
+
+   
 }
 
 class enemySquare {
@@ -99,3 +148,16 @@ class enemySquare {
 }
 
 
+class base {
+
+    constructor(){
+
+    }
+
+}
+
+class player {
+    constructor(){
+
+    }
+}
