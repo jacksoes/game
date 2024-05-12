@@ -1,74 +1,61 @@
+
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    
-    squareOne = new enemySquare(400, 800, 100)
-    squareTwo = new enemySquare(200, 500, 150)
-    levelOne = new levelDesign(new enemySquare(400, 800, 70), new base(), new player())
-    
+    levelOne = new levelDesign(generateEnemies(), new base(), new player())
 }
   
 function draw() {
-
     // level one
     levelOne.loadItems()
-    
     levelOne.handlemove()
 
-    
-    
-    // spawn enemy object and make move.
-    squareOne.spawn()
-    squareOne.move()
-
-    squareTwo.spawn()
-    squareTwo.move()
-
-    
+    ellipse(200, windowHeight / 2 + 50, 200);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 function mousePressed() {    // if mouse presses square, cut.
-
-    if (dist(mouseX, mouseY, squareOne.positionX, squareOne.positionY) <= 100) {
-    squareOne.incrementCuts()
-    console.log(`position x: ${squareOne.positionX}, positionY: ${squareOne.positionY}\n mousX: ${mouseX}, mouseY: ${mouseY}`)
-    }
-    if (dist(mouseX, mouseY, squareTwo.positionX, squareTwo.positionY) <= 100){
-        squareTwo.incrementCuts()
+    for (let i = 0; i < levelOne.squares.length; i++)
+    {
+    if (dist(mouseX, mouseY, levelOne.getSquareX(i), levelOne.getPositionY(i)) <= 100) {
+        levelOne.squares[i].incrementCuts()
+        }
     }
 }
-
-
-
-  
-
-
-
-
-function loadUser(){
-    
- 
-    
-
-}
-
-
 
 class levelDesign {
     //TO-DO: constructor
     //states: level color,
     //
-    constructor(square, base, player){
-        this.square = square
+    constructor(squares, base, player){
+        this.squares = squares
         this.player = player
         this.base = base
     }
+
+    getSquareX(index){
+        return this.squares[index].getPositionX()
+    }
     
+    getSquareY(index){
+        return this.squares[index].getPositionY()
+    }
 
 
     loadItems(){
         this.loadColor()
         this.loadPlayer()
-        this.loadGUI()
+       // this.loadGUI()
         
     }
 
@@ -93,8 +80,12 @@ class levelDesign {
     }
 
     handlemove() {
-        this.square.spawn()
-        this.square.move()
+
+        this.squares.forEach(square => {
+            square.spawn()
+            square.move()
+        })
+
     }
 
    
@@ -108,6 +99,14 @@ class enemySquare {
         this.size = size
         this.cuts = 0
 
+    }
+
+    getPositionX(){
+        return this.positionX
+    }
+
+    getPositionY(){
+        return this.positionY
     }
 
   
@@ -135,7 +134,7 @@ class enemySquare {
     }
 
     move(){
-        this.positionY -= 1
+        this.positionX -= 1
     }
         
     incrementCuts(){
@@ -144,6 +143,14 @@ class enemySquare {
         else
             this.cuts += 1;
     }
+
+}
+
+class enemyCircle{
+
+}
+
+class enemyTriangle{
 
 }
 
@@ -161,3 +168,23 @@ class player {
 
     }
 }
+
+function generateEnemies () {
+    list = []
+    let spacing = 250
+    let enemyAmount = 16
+
+    function fillList () {
+        for (let i = 0; i < enemyAmount; i++)
+        {
+
+            list[list.length] =  new enemySquare(2000 + spacing, windowHeight / 2, Math.floor(Math.random() * (200-60) + 60))
+            spacing += 250
+        }
+    }
+    fillList()
+    return list
+}
+
+
+
