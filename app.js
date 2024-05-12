@@ -27,7 +27,7 @@ function draw() {
 function mousePressed() {    // if mouse presses square, cut.
     for (let i = 0; i < levelOne.squares.length; i++)
     {
-    if (dist(mouseX, mouseY, levelOne.getSquareX(i), levelOne.getPositionY(i)) <= 100) {
+    if (dist(mouseX, mouseY, levelOne.getSquareX(i), levelOne.getSquareY(i)) <= 100) {
         levelOne.squares[i].incrementCuts()
         }
     }
