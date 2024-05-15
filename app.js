@@ -15,7 +15,7 @@ function draw() {
 
     ellipse(200, windowHeight / 2 + 50, 200);
 
-    userJack.Square()
+    userJack.square1()
 
 
     
@@ -206,7 +206,7 @@ class jack {
     constructor(){
     }
 
-    Square(){
+    square1(){
         square(400, 300, 200, 50)
     }
 }
