@@ -1,8 +1,11 @@
-//test jack
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     levelOne = new levelDesign(generateEnemies(), new base(), new player())
+
+
+    userJack = new jack();
+
 }
   
 function draw() {
@@ -11,6 +14,11 @@ function draw() {
     levelOne.handlemove()
 
     ellipse(200, windowHeight / 2 + 50, 200);
+
+    userJack.Square()
+
+
+    
 }
 
 
@@ -189,3 +197,16 @@ function generateEnemies () {
 
 
 
+
+
+
+
+
+class jack {
+    constructor(){
+    }
+
+    Square(){
+        square(400, 300, 200, 50)
+    }
+}
