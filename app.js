@@ -213,7 +213,7 @@ class jack {
     constructor(){
     }
 
-    Square(){
+    square1(){
         square(400, 300, 200, 50)
     }
 }
