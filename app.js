@@ -3,6 +3,7 @@
 function setup() {
     createCanvas(windowWidth, windowHeight);
     levelOne = new levelDesign(generateEnemies(), new base(), new player())
+    Jay = new JJ()
 }
   
 function draw() {
@@ -11,13 +12,21 @@ function draw() {
     levelOne.handlemove()
 
     ellipse(200, windowHeight / 2 + 50, 200);
+    Jay.Square1()
 }
 
 
 // test jay
 // test test jay
 
+class JJ {
+     constructor() {
 
+     }
+     Square1(){
+        square(400, 100, 200)
+     }
+}
 
 
 
