@@ -1,8 +1,10 @@
 
-
 function setup() {
     createCanvas(windowWidth, windowHeight);
     levelOne = new levelDesign(generateEnemies(), new base(), new player())
+
+
+    userJack = new jack();
     Jay = new JJ()
 }
   
@@ -12,6 +14,8 @@ function draw() {
     levelOne.handlemove()
 
     ellipse(200, windowHeight / 2 + 50, 200);
+
+    userJack.Square()
     Jay.Square1()
 }
 
@@ -180,6 +184,7 @@ class player {
     }
 }
 
+
 function generateEnemies () {
     list = []
     let spacing = 250
@@ -199,3 +204,16 @@ function generateEnemies () {
 
 
 
+
+
+
+
+
+class jack {
+    constructor(){
+    }
+
+    Square(){
+        square(400, 300, 200, 50)
+    }
+}
