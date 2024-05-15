@@ -1,4 +1,4 @@
-
+//test jack
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -168,6 +168,7 @@ class player {
 
     }
 }
+
 
 function generateEnemies () {
     list = []
