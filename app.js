@@ -103,6 +103,11 @@ class levelDesign {
 
     }
 
+    //load base
+    //increase player score
+    //sense collison
+    // 
+
    
 }
 
@@ -179,8 +184,22 @@ class base {
 }
 
 class player {
-    constructor(){
+    constructor() {
+        this.score = 0;
+    }
 
+    increaseScore() {
+        this.score += 1;
+    }
+
+    getScore() {
+        return this.score;
+    }
+// displays score
+    displayScore() {
+        textSize(32);
+        fill(0);
+        text('Score: ' + this.score, 10, 30);
     }
 }
 
