@@ -177,10 +177,21 @@ class enemyTriangle{
 
 class base {
 
-    constructor(){
-
+    constructor(positionX, positionY, cuts) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.cuts = cuts;
+        this.hp = 100; 
+      }
+    
+      decreaseHP() {
+    // decreases the hp by 10
+        this.hp -= 10;
+    // ensures the HP can not go below zero
+        if (this.hp < 0) {
+          this.hp = 0;
+        }
     }
-
 }
 
 class player {
