@@ -1,7 +1,9 @@
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    levelOne = new levelDesign(generateEnemies(), new base(), new player())
+    levelOne = new levelDesign(generateEnemies(), new base(200, windowHeight /2 + 50, 0), new player())
+    textSize(32);
+    
 
 
     userJack = new jack();
@@ -9,14 +11,24 @@ function setup() {
 }
   
 function draw() {
+    
     // level one
     levelOne.loadItems()
     levelOne.handlemove()
 
-    ellipse(200, windowHeight / 2 + 50, 200);
+    //ellipse(200, windowHeight / 2 + 50, 200);
 
-    userJack.square1()
-    Jay.square()
+    levelOne.spawnBase()
+    //userJack.square1()
+    //Jay.square()
+
+
+    levelOne.handleCollide()
+
+    levelOne.displayScore()
+    levelOne.displayHealth()
+
+    
 }
 
 
@@ -103,13 +115,64 @@ class levelDesign {
 
     }
 
+    spawnBase(){
+            this.base.spawn()
+        
+        
+
+            }
+
+    handleCollide(){
+        for (let i = 0; i < this.squares.length; i++)
+        {
+            if (this.squares[i].positionX == this.base.positionX + 200)
+                {
+                    
+                    if (this.squares[i].cuts == this.base.cuts)
+                        {
+                            this.increasePlayerScore()
+                            this.base.randomizeCuts()
+                            //console.log("increase score and change cuts")
+                        }
+                    else {
+                        this.decreaseBaseHealth()
+                        //console.log("fail and minus hp")
+                    }
+                }
+
+        }
+
+    }
+
+    increasePlayerScore()
+    {
+        this.player.increaseScore()
+    }
+
+    decreaseBaseHealth()
+    {
+        this.base.decreaseHP()
+
+    }
+
+    displayScore(){
+        this.player.displayScore();
+
+    }
+
+    displayHealth(){
+        this.base.displayHP();
+    }
+        
+    }
+
     //load base
     //increase player score
     //sense collison
     // 
 
    
-}
+
 
 class enemySquare {
     constructor(positionX, positionY, size)
@@ -191,6 +254,40 @@ class base {
         if (this.hp < 0) {
           this.hp = 0;
         }
+
+        
+    }
+
+    randomizeCuts()
+    {
+        this.cuts = Math.floor(Math.random() * 5)
+    }
+
+    displayHP() {
+        fill(0);
+        text('health: ' + this.hp, windowWidth / 6, windowHeight / 2);
+    }
+
+    spawn(){
+        noFill();
+        
+        switch (this.cuts){
+            case 1:
+                square(this.positionX, this.positionY, 300, 50, 0, 0, 0)
+                break;
+            case 2:
+                square(this.positionX, this.positionY, 300, 50, 50, 0, 0)
+                break;
+            case 3:
+                square(this.positionX, this.positionY, 300, 50, 50, 50, 0)
+                break;
+            case 4:
+                square(this.positionX, this.positionY, 300, 50, 50, 50, 50)
+                break;
+            default:   
+                square(this.positionX, this.positionY, 300)
+                //break;
+        }
     }
 }
 
@@ -200,7 +297,7 @@ class player {
     }
 
     increaseScore() {
-        this.score += 1;
+        this.score += 100;
     }
 
     getScore() {
@@ -208,13 +305,13 @@ class player {
     }
 // displays score
     displayScore() {
-        textSize(32);
         fill(0);
-        text('Score: ' + this.score, 10, 30);
+        text('Score: ' + this.score, windowWidth / 6, windowHeight / 3);
     }
 }
 
 
+//TODO ADD to a class
 function generateEnemies () {
     list = []
     let spacing = 250
@@ -224,7 +321,7 @@ function generateEnemies () {
         for (let i = 0; i < enemyAmount; i++)
         {
 
-            list[list.length] =  new enemySquare(2000 + spacing, windowHeight / 2, Math.floor(Math.random() * (200-60) + 60))
+            list[list.length] =  new enemySquare(2000 + spacing, windowHeight / 1.5, Math.floor(Math.random() * (200-60) + 60))
             spacing += 250
         }
     }
